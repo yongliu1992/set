@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>websocket</title>
+</head>
+
+<body>
+<div>
+    <button id='send'> 发送</button>
+</div>
+</body>
+<script>
+    var socket = new WebSocket('ws://127.0.0.1:8008');
+    socket.onopen = function(event) {
+       console.log('连接');
+    };
+
+    socket.onmessage = function(event) {
+        var content = event.data;
+        if (content.length > 2) {
+            console.log('返回值'+content);
+        }
+    };
+    var send = document.getElementById('send');
+    send.addEventListener('click', function() {
+
+        var content = '13123'+Math.random();
+        socket.send(content);
+        console.log(content);
+    });
+</script>
+
+</html>
