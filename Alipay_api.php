@@ -12,9 +12,8 @@ class Alipay_api {
     var $key;
     var $alipay_config=[];
 
-    function __construct($Param) {
-        $partner_id = $Param[0];
-        $key  = $Param[1];
+    function __construct( $partner_id,$key) {
+
         $this -> partner_id = $partner_id;
         $this -> key = $key;
         $this->alipay_config['partner']=$partner_id;
@@ -150,4 +149,29 @@ class Alipay_api {
     }
 
 }
-//这个类 获得一个url地址 可在h5里面唤起手机支付宝，微信也有类似的功能   不过需要单独申请H5支付
+
+//ALIPAY_PARTNER_ID 合作ID、需要定义 ,$key 密钥 需要定义
+$alipay_api = new alipay_api(ALIPAY_PARTNER_ID, ALIPAY_KEY);
+
+$order['pay_fee']='1';
+$ip =  $this->input->ip_address();
+$ip = '219.142.151.66';
+
+$order['show_url']='http://www.baidu.com 商品展示地址 填写你自己的 可为空';
+$return_url='return url 填写你自己的';//return url当前页面
+$order['out_trade_no'] = $order['order_id'].mt_rand(111,999);//订单号
+$pay_url = $alipay_api -> pay_url_mobile(array(
+    'service' => 'create_direct_pay_by_user',
+    'seller_email' => ALIPAY_EMAIL,//阿里邮箱
+    'payment_type'	=> '1',
+    'notify_url'	=> ALIPAY_PAY_NOTIFY_URL,//回掉地址
+    'return_url' => $return_url,
+    'out_trade_no'	=> $order['out_trade_no'],
+    'subject'	=> $order['title'],
+    'body'	=> '',
+    'total_fee'	=> $order['money'],
+    'show_url'	=>  $order['show_url'],
+    'exter_invoke_ip'	=>$ip,
+    'qr_pay_mode'=>0
+));
+//这个类 获得一个url地址，自己可以处理，决定何时 h5里面唤起手机支付宝（官方sdk是使用累死aop 表单提交方式 唤起支付宝），微信也有类似的功能   不过需要单独申请H5支付
