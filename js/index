@@ -1,0 +1,63 @@
+
+//用来做家在和数据查询的一段js
+var x=1;
+$("#loadAllMore").click(function(){
+    $.getJSON("/course/listsA?page="+x,function(data,status){
+        if(data.status==1){
+            $("#allCourse").append(data.info.content);
+            if(data.info.length<8)$("#menu"+xx).find(".load_more").hide();
+        }
+        x++;
+    });
+    return false;
+});
+
+var arr=[];
+$(".loadMoreType").click(function(){
+
+    xx=$(".tab-pane").find("[aria-expanded='true']").attr("href");
+    xx= xx.substring(5);
+    if(!arr[xx]){
+        arr[xx]=1;//arr 的xx 代表page页
+    }else{
+        arr[xx]+=1;
+    }
+
+    $.getJSON("/course/listsA?page="+arr[xx]+'&label='+xx,function(data,status){
+
+        if(data.status==1){
+
+            $("#menu"+xx).find(".block_content").append(data.info.content);
+            if(data.info.length<8)$("#menu"+xx).find(".load_more").hide();
+        }else{
+            $("#menu"+xx).find(".load_more").hide();
+        }
+        x++;
+    });
+
+    return false;
+});
+var marr=[];
+$(".load_more_mobile").click(function() {
+    xx=$(".news_menu_nav_m").find("[aria-expanded='true']").attr("href");
+    xx=xx.substring(5);
+
+    if(!marr[xx]){
+        marr[xx]=1;//arr 的xx 代表page页
+    }else{
+        marr[xx]+=1;
+    }
+    $.getJSON("/course/listsA?page="+marr[xx]+'&label='+xx,function(data,status){
+
+        if(data.status==1){
+            $("#menu"+xx).find(".row").append(data.info.content);
+            if(data.info.length<8)$("#menu"+xx).find(".load_more").hide();
+        }else{
+            $("#menu"+xx).find(".loadMoreType").hide();
+        }
+        x++;
+    });
+
+
+    return false;
+})
