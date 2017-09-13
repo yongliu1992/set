@@ -26,3 +26,6 @@ if((intval($rand) == $redis->get('login:' . $mobile))&&$rand>0)
 醉了醉了
 redis
 写代码抽象思维很重要，先想好自己要做什么，适当运用设计模式来解决问题
+
+今天帮助处理oss问题
+订单相关问题
