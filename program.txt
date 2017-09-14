@@ -29,3 +29,45 @@ redis
 
 今天帮助处理oss问题
 订单相关问题
+
+
+js错误代码例子
+function  needLogin() {
+
+        var loginBool = <?php echo intval($_SESSION['user_id']);?>
+        if(!loginBool){
+            if(getEnv() ==1){
+            $("#loginShow").click();
+            }else if(getEnv()==2){
+                $("#loginShow").click();
+            }else if(getEnv()==3){
+                window.location="/wechat/login";
+            }
+        }
+    }
+    needLogin();
+
+    正确做法
+    function  needLogin() {
+
+            var loginBool = <?php echo intval($_SESSION['user_id']);?>;//这个fen hao分号太重要了
+     if(!loginBool){
+                if(getEnv() ==1){
+                $("#loginShow").click();
+                }else if(getEnv()==2){
+                    $("#loginShow").click();
+                }else if(getEnv()==3){
+                    window.location="/wechat/login";
+                }
+            }
+        }
+        needLogin();
+
+        在js中不要定义重复函数，否则 代码无法正确执行。。有些时候粘贴了几次 问题就出来了。放在一个公共地方 或者文件里面 选择加载即可
+
+        js document ready
+
+
+        git tip 个性化文件 要加入忽略列表
+
+
