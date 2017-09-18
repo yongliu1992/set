@@ -98,3 +98,16 @@ redis操作数据都是可以按毫秒计算的，redis事务，持久化方式 
 判断竞争条件，及时销毁不用的session
 
 
+
+微信支付相关限制太多了，
+js作用域，回调域名，扫码回掉域名，支付发起目录，涉及到 商户平台账号，公众平台账号
+
+
+ci框架路由注意 大小写，配置文件中的 index_page 会影响到他的路由，自动重写带上index.php，可能与 nginx配置文件冲突
+
+比如 有人的做法是hi index_page 是index.php，config中的base_url是个路径，这样他用ip直接访问 上级 就会得到正确的ci路径
+这样做 不如 nginx 配置好重写，index_page 取空 ，base_url实际路径
+
+
+
+
