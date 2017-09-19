@@ -1,0 +1,10 @@
+redis队列
+
+*/1 * * * * root php  /YourDir/input.php
+
+ */3 * * * * root php /YourDir/output.php
+
+最简单的队列，使用redis的队列 一个进去 一个出来消费
+或者使用有序集合
+
+开始研究这个队列系统如何使用 及 源码分析 2017年09月18日23:33:40
