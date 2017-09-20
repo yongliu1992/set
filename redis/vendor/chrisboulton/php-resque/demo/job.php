@@ -3,8 +3,12 @@ class PHP_Job
 {
 	public function perform()
 	{
-		sleep(120);
-		fwrite(STDOUT, 'Hello!');
+	    for($i=0;$i<10;$i++){
+	        sleep(1);
+	        fwrite(STDOUT,$i);
+        }
+//		sleep(120);
+//		fwrite(STDOUT, 'Hello!');
 	}
 }
 ?>

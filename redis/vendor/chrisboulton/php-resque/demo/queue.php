@@ -10,7 +10,7 @@ Resque::setBackend('127.0.0.1:6379');
 $args = array(
 	'time' => time(),
 	'array' => array(
-		'test' => 'test',
+		'test' => 'test-2',
 	),
 );
 
