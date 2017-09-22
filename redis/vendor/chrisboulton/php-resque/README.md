@@ -1,3 +1,7 @@
+QUEUE=wechat LOGGING=1 VERBOSE=1 VVERBOSE=1 APP_INCLUDE=./wechat_push.php   php resque.php
+简单结合微信推送 理解了思想  剩下的都简单了
+
+
 php-resque: PHP Resque Worker (and Enqueue) [![Build Status](https://secure.travis-ci.org/chrisboulton/php-resque.png)](http://travis-ci.org/chrisboulton/php-resque)
 ===========================================
 

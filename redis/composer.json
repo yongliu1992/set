@@ -1,5 +1,6 @@
 {
   "require": {
-    "chrisboulton/php-resque": "1.2.x"
+    "chrisboulton/php-resque": "1.2.x",
+    "overtrue/wechat": "~3.1"
   }
 }

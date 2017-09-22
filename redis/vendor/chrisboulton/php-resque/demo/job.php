@@ -12,15 +12,5 @@ class PHP_Job
 	}
 }
 
-class PHP_WECHAT
-{
-    public function perform()
-    {
-        for($i=0;$i<3;$i++){
-            sleep(1);
-           // echo $i;
-            fwrite(STDOUT,$i);
-        }
-    }
-}
+
 ?>

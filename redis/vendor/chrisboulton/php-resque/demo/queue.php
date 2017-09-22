@@ -1,7 +1,4 @@
 <?php
-if(empty($argv[1])) {
-	die('Specify the name of a job to add. e.g, php queue.php PHP_Job');
-}
 
 require '../lib/Resque.php';
 date_default_timezone_set('PRC');
@@ -14,6 +11,8 @@ $args = array(
 	),
 );
 
+Resque::enqueue('wechat', 'Mail', array('1dest@mail.com', 'hi!', 'this is a test conten222t'),true);
+exit;
 $jobId = Resque::enqueue('default', $argv[1], $args, true);
 echo "Queued job ".$jobId."\n\n";
 ?>
