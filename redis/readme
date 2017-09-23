@@ -8,3 +8,17 @@ redis队列
 或者使用有序集合
 
 开始研究这个队列系统如何使用 及 源码分析 2017年09月18日23:33:40
+
+第一个参数代表 队列名字 第二个代表是否记录日志，第三个 详细信息，第四个 更详细的信息 第五个代表job类
+ QUEUE=wechat LOGGING=1 VERBOSE=1 VVERBOSE=1 APP_INCLUDE=./wechat_push.php   php resque.php
+
+入列的话执行 inqueue.php 即可
+
+今天干了3件事情，
+1、阿里云的直播，推流上去，然后通过播放器调出来
+2、博客网站的https 更新了一下
+3、去看了下nginx的书籍，解决了原来关于php-fpm与fastcgi的疑惑。
+首先 nginx自己继承fastcgi模块，也就是他能与标准fastcgi接口服务器通信。
+nginx 有master 和worker进程，worker进程判断php文件 则可以交给fastcgi服务器，
+比如php-fpm中的worker进程就能提供fastcgi的接口通信，处理完 返回结果，nginx输出结果给http client
+
