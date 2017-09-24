@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>nginx socket指令</h1>
+lingering_clsoe 制定如何保持客户端的链接，以便用于更多数据的传输
+send_timeout 在两次成功的客户端接受相应的写操作之间设置一个超市时间
+tcp_nodelay  用于keep-alive链接
+tcp_nopush  依赖于sendfile的调用，使nginx在一个数据包中尝试发送响应头，以及在数据包中发送一个完整的文件。
+
+
+location修饰符
+= 使用精确匹配并且种植搜索
+～区分大小写额度正则表达式匹配
+～*不区分大小写的正则表达式匹配
+^～ 如果该location是最佳皮皮饿，那么对匹配这个location的字符串不再见性正则表达式检测。注意这不是一个正则表达式匹配 它的目的是优先于正则表达式的匹配
+</body>
+</html>
