@@ -1,35 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 
 <head>
     <meta charset="UTF-8">
     <title>websocket</title>
 </head>
+<script
+        src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+        crossorigin="anonymous"></script>
+<br/>
+<br/>
+name :  <input type="text" id="name"><br/><br/>
+content:<input type="text" id="myText"><br/><br/>
 
+<br/>
+<br/>
+<div id="chatList">
+
+</div>
 <body>
 <div>
     <button id='send'> 发送</button>
 </div>
 </body>
 <script>
+
     var socket = new WebSocket('ws://127.0.0.1:8008');
     socket.onopen = function(event) {
        console.log('连接');
+      //  socket.send("----");
     };
 
     socket.onmessage = function(event) {
         var content = event.data;
-        if (content.length > 2) {
-            console.log('返回值'+content);
-        }
-    };
-    var send = document.getElementById('send');
-    send.addEventListener('click', function() {
+        content = eval("("+content+")");
 
-        var content = '13123'+Math.random();
-        socket.send(content);
-        console.log(content);
+        $("#chatList").append("<h6>"+content.name+":"+content.content+"</h6>");
+    };
+
+    $("#send").click(function(){
+        var content = $("#myText").val();
+        socket.send('name='+$("#name").val()+'&content='+content);
+        return false;
     });
+
 </script>
 
 </html>

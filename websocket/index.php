@@ -33,6 +33,8 @@
 /**
  * 聊天室服务器  websocket 专用
  */
+
+
 class Server_socket
 {
     private $socket;
@@ -61,6 +63,7 @@ class Server_socket
                     $arr =  array_keys($this->accept);
                     $key = end($arr);
                     $this->hands[$key] = false;
+
                 }else{
                     $length = socket_recv($sock, $buffer, 204800, null);
                     $key = array_search($sock, $this->accept);
@@ -69,18 +72,46 @@ class Server_socket
                     }else if($length < 1){
                         $this->close($sock);
                     }else{
-                        // 解码
-                        $data = $this->decode($buffer);
-                       // file_put_contents('a.txt','buffer'.json_encode($data),FILE_APPEND);
-                        print_r($data);
-                        //编码
-                        $data = $this->encode($data);
-                        print_r($data);
-                       // file_put_contents('a.txt','data'.json_encode($data),FILE_APPEND);
-                        //发送
-                        foreach ($this->accept as $client) {
-                            socket_write($client, $data,strlen($data));
+
+                       /* for($i=0;$i<30;$i++) {
+                            $data = $i;
+                            $data = $this->encode($data);
+
+                            //  file_put_contents('a.txt','data'.json_encode($data),FILE_APPEND);
+                            //发送
+                            foreach ($this->accept as $client) {
+                                socket_write($client, $data,strlen($data));
+                            }
+                        }*/
+                          /* $redis = new Redis();
+                           $redis->connect('localhost');
+                            $data = $redis->lPop('hello2');
+                            $data = $this->encode($data);
+                            print_r($data);*／
+                            //  file_put_contents('a.txt','data'.json_encode($data),FILE_APPEND);
+                            //发送
+                            foreach ($this->accept as $client) {
+                                socket_write($client, $data, strlen($data));
+                            }
                         }
+                            /*
+                            }
+*/
+                            // 解码
+                            $data = $this->decode($buffer);
+                        parse_str($data,$data2);
+
+                         //   file_put_contents('a.txt',var_export($data2,1),FILE_APPEND);
+                            //print_r($data2);
+                            $data = json_encode($data2);
+                            //编码
+                            $data = $this->encode($data);
+                          //  print_r($data);
+                            //  file_put_contents('a.txt','data'.json_encode($data),FILE_APPEND);
+                            //发送
+                            foreach ($this->accept as $client) {
+                                socket_write($client, $data,strlen($data));
+                            }
                     }
                 }
             }
@@ -154,4 +185,4 @@ class Server_socket
 }/* end of class Server_socket*/
 
 $server_socket = new Server_socket('127.0.0.1',8008,1000);
-$server_socket->start(); sleep(1000);
+$server_socket->start();
