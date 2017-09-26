@@ -1,13 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kok
- * Date: 2017/9/25
- * Time: 23:20
- */
 
-
-<?php
 /**
  * CodeIgniter
  *

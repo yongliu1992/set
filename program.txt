@@ -128,3 +128,90 @@ Worker作为守护进程运行，并且定时检查队列。
 
 
 多考虑恶劣情况，多去看手册，有风险的地方 及时写日志，思考如何消除风险
+
+php安装扩展 之mcrypt 加密
+1.下载Libmcrypt,mhash,mcrypt安装包
+Libmcrypt(libmcrypt-2.5.8.tar.gz)：http://sourceforge.net/project/showfiles.php?group_id=87941&package_id=91774&release_id=487459
+
+mcrypt(mcrypt-2.6.8.tar.gz ):http://sourceforge.net/project/showfiles.php?group_id=87941&package_id=91948&release_id=642101
+
+mhash(mhash-0.9.9.9.tar.gz):http://sourceforge.net/project/showfiles.php?group_id=4286&package_id=4300&release_id=645636
+
+
+2.先安装Libmcrypt
+
+#tar -zxvf libmcrypt-2.5.8.tar.gz
+
+#cd libmcrypt-2.5.8
+
+#./configure
+
+#make
+
+#make install
+
+说明：libmcript默认安装在/usr/local
+
+安装完后重启机器
+
+
+
+3.再安装mhash
+
+#tar -zxvf mhash-0.9.9.9.tar.gz
+
+#cd mhash-0.9.9.9
+
+#./configure
+
+#make
+
+#make install
+
+
+
+4.最后安装mcrypt
+
+#tar -zxvf mcrypt-2.6.8.tar.gz
+
+#cd mcrypt-2.6.8
+
+#LD_LIBRARY_PATH=/usr/local/lib ./configure
+
+#make
+
+#make install
+
+说明：由于在配置Mcrypt时，会找不到libmcrypt的链接库，导致无法编译，因为Libmcrypt的链接库在/usr/local/lib文件夹下。
+
+因次，在配置mcrypt时要加入LD_LIBRARY_PATH=/usr/local/lib导入键接库。
+
+三.安装PHP的Pecl扩展mcrypt
+注意mcrypt是PHP自带的Pecl扩展，所以只要去PHP的解压缩目录去找mcrypt包即可。
+这一点区别于PHP安装第三方扩展，参考PHP安装与使用VLD查看opcode代码【PHP安装第三方扩展的方法】
+1.动态加载
+使用php的常见问题是：编译php时忘记添加某扩展，后来想添加扩展，但是因为安装php后又装了一些东西如PEAR等，不想重装整个PHP，于是可以采用动态编译，使用phpize。需要注意的是要有与现有php完全相同的php压缩包。
+#cd /usr/php-5.4.8/ext/mcrypt
+#/usr/local/webserver/php/bin/phpize
+#./configure --with-php-config=/usr/local/webserver/php/bin/php-config
+#make && make install
+给你的php.ini添加一条extension=mcrypt.so
+重启apache
+# /usr/local/apache2/bin/apachectl restart
+查看phpinfo(),mcrypt以及安装好
+
+
+安装完成
+--------------------------
+2.静态编译
+在任意PHP文件中加入函数 phpinfo()，即可取得目前PHP的配置
+在这些配置后面新增需要加入的配置：--with-mcrypt --with-mhash
+然后进入php源代码目录make clean（一定需要） ，然后执行这条完整的configure命令,依次
+make
+make install
+根据你的需要加上所要的配置，例如：
+./configure --with-apxs2=/usr/local/web/apache/bin/apxs --with-mcrypt --with-mhash
+
+//./configure --with-apxs2=/usr/local/web/apache/bin/apxs --with-mcrypt --with-mhash --with-libxml-dir --enable-bcmath --enable-sockets
+
+总体思路，先安装软件，然后安装扩展，启用扩展，如果没有源码  就去官网下载一份
