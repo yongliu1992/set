@@ -215,3 +215,10 @@ make install
 //./configure --with-apxs2=/usr/local/web/apache/bin/apxs --with-mcrypt --with-mhash --with-libxml-dir --enable-bcmath --enable-sockets
 
 总体思路，先安装软件，然后安装扩展，启用扩展，如果没有源码  就去官网下载一份
+
+
+
+今天坐车回家，  计划安排不当，导致又是急急忙忙的赶，
+不如提前一小时走，然后 回家还要写代码，
+
+今天看看书 回家
