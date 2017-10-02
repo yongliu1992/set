@@ -69,7 +69,7 @@ post_controller 在控制器完全执行后立即调用。
 display_override 覆盖在_display()系统执行结束时用于将完成的页面发送到Web浏览器的方法。这允许您使用自己的显示方法。请注意，您将需要引用CI超级对象，然后通过调用可以使用完成的数据 。$this->CI =& get_instance()$this->CI->output->get_output()
 cache_override 使您能够调用自己的方法而不是输出库中的_display_cache() 方法。这允许您使用自己的缓存显示机制。
 post_system 在最终呈现的页面发送到浏览器之后调用，在完成的数据发送到浏览器之后，系统执行结束时。*/
-<?php
+
 /**
  * CodeIgniter
  *
