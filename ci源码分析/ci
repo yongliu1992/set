@@ -28,3 +28,141 @@ UPDATE table_name SET name = 'Rick', email = 'rick@example.com', url = 'example.
 注解
 
 所有的值自动被转义，生成安全的查询语句。
+
+
+php备份数据库
+
+备份你的数据库
+数据备份说明
+允许你备份完整的数据库或指定的表。备份的数据可以压缩成 Zip 或 Gzip 格式。
+
+注解
+
+该功能只支持 MySQL 和 Interbase/Firebird 数据库。
+注解
+
+对于 Interbase/Firebird 数据库，只能提供一个备份文件名参数。
+
+$this->dbutil->backup('db_backup_filename');
+注解
+
+限于 PHP 的执行时间和内存限制，备份非常大的数据库应该不行。如果你的数据库非常大， 你可以直接使用命令行进行备份，如果你没有 root 权限的话，让你的管理员来帮你备份。
+使用示例
+// Load the DB utility class
+$this->load->dbutil();
+
+// Backup your entire database and assign it to a variable
+$backup = $this->dbutil->backup();
+
+// Load the file helper and write the file to your server
+$this->load->helper('file');
+write_file('/path/to/mybackup.gz', $backup);
+
+// Load the download helper and send the file to your desktop
+$this->load->helper('download');
+force_download('mybackup.gz', $backup);
+设置备份参数
+备份参数为一个数组，通过第一个参数传递给 backup() 方法，例如:
+
+$prefs = array(
+    'tables'    => array('table1', 'table2'),   // Array of tables to backup.
+    'ignore'    => array(),         // List of tables to omit from the backup
+    'format'    => 'txt',           // gzip, zip, txt
+    'filename'  => 'mybackup.sql',      // File name - NEEDED ONLY WITH ZIP FILES
+    'add_drop'  => TRUE,            // Whether to add DROP TABLE statements to backup file
+    'add_insert'    => TRUE,            // Whether to add INSERT data to backup file
+    'newline'   => "\n"             // Newline character used in backup file
+);
+
+$this->dbutil->backup($prefs);
+备份参数说明
+参数	默认值 选项	描述
+tables	empty array	None	你要备份的表，如果留空将备份所有的表。
+ignore	empty array	None	你要忽略备份的表。
+format	gzip	gzip, zip, txt	导出文件的格式。
+filename	the current date/time	None	备份文件名。如果你使用了 zip 压缩这个参数是必填的。
+add_drop	TRUE	TRUE/FALSE	是否在导出的 SQL 文件里包含 DROP TABLE 语句
+add_insert	TRUE	TRUE/FALSE	是否在导出的 SQL 文件里包含 INSERT 语句
+newline	"\n"	"\n", "\r", "\r\n"	导出的 SQL 文件使用的换行符
+foreign_key_checks	TRUE	TRUE/FALSE	导出的 SQL 文件中是否继续保持外键约束
+类参考
+class CI_DB_utility
+backup([$params = array()])
+参数:
+$params (array) -- An associative array of options
+返回:
+raw/(g)zipped SQL query string
+
+返回类型:
+string
+
+根据用户参数执行数据库备份。
+
+database_exists($database_name)
+参数:
+$database_name (string) -- Database name
+返回:
+TRUE if the database exists, FALSE otherwise
+
+返回类型:
+bool
+
+判断数据库是否存在。
+
+list_databases()
+返回:	Array of database names found
+返回类型:	array
+获取所有的数据库名称列表。
+
+optimize_database()
+返回:	Array of optimization messages or FALSE on failure
+返回类型:	array
+优化数据库。
+
+optimize_table($table_name)
+参数:
+$table_name (string) -- Name of the table to optimize
+返回:
+Array of optimization messages or FALSE on failure
+
+返回类型:
+array
+
+优化数据库表。
+
+repair_table($table_name)
+参数:
+$table_name (string) -- Name of the table to repair
+返回:
+Array of repair messages or FALSE on failure
+
+返回类型:
+array
+
+修复数据库表。
+
+csv_from_result($query[, $delim = ', '[, $newline = "n"[, $enclosure = '"']]])
+参数:
+$query (object) -- A database result object
+$delim (string) -- The CSV field delimiter to use
+$newline (string) -- The newline character to use
+$enclosure (string) -- The enclosure delimiter to use
+返回:
+The generated CSV file as a string
+
+返回类型:
+string
+
+将数据库结果对象转换为 CSV 文档。
+
+xml_from_result($query[, $params = array()])
+参数:
+$query (object) -- A database result object
+$params (array) -- An associative array of preferences
+返回:
+The generated XML document as a string
+
+返回类型:
+string
+
+将数据库结果对象转换为 XML 文档。
