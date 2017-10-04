@@ -218,8 +218,24 @@ make install
 
 升级了操作系统，导致php版本升级，重装redis扩展，下载回来编译，phpize phpconfig make make install 在php.ini中开启，重启php进程，如果是apche的话  重启apche
 
-今天坐车回家，  计划安排不当，导致又是急急忙忙的赶，
-不如提前一小时走，然后 回家还要写代码，
+下载安装debug
+这些是安装Xdebug的说明。请参阅 http://xdebug.org/support.php以获得支持。
 
-今天看看书 回家
+您需要与其他PHP分开编译Xdebug。但是请注意，您需要访问脚本phpize和php-config。如果您的系统没有，phpize并且php-config您将需要首先从源码包中编译和安装PHP，因为这些脚本是PHP编译和安装过程的副产品。源版本与安装的版本匹配很重要，因为PHP版本之间存在轻微但重要的差异。
+
+一旦您有权访问phpize并php-config执行以下操作：
+
+解压压缩包：tar -xzf xdebug-2.4.x.tgz。请注意，您不需要在PHP源代码树中解压缩tarball。Xdebug是独立编译的，如上所述。
+cd xdebug-2.4.x
+运行phpize：（phpize 或/path/to/phpize如果phpize不在您的路径）。
+./configure --enable-xdebug（或：../configure --enable-xdebug --with-php-config=/path/to/php-config如果php-config不在你的路径）
+跑： make
+cp modules/xdebug.so /to/wherever/you/want/it
+添加以下行到php.ini： zend_extension="/wherever/you/put/it/xdebug.so"
+重新启动您的网络服务器。
+编写一个调用PHP页面phpinfo();。在浏览器中加载它，并查找xdebug模块上的信息。如果你看到，你已经成功了！
+
+php -m 查看php已安装模块
+
+
 
