@@ -5,7 +5,11 @@
  * Date: 2017/9/7
  * Time: 07:42
  */
-
+echo 34;
+//var_dump(111);
+echo 91;
+echo 333;
+exit;
 function writeLog($path,$text) {
     if(is_array($text))$text = var_export($text,ture);
     file_put_contents ( $path, date ( "Y-m-d H:i:s" ) . "  " . $text . "\r\n", FILE_APPEND );
@@ -37,7 +41,7 @@ function formatNum($number){
 {
     // 判断是否保留一级数组键 (一级数组键可以为非数字)
     if($stkeep) $stArr = array_keys($array2D);
-    // 判断是否保留二级数组键 (所有二级数组键必须相同)
+    // 判断是否保留二级数组键 (所有二级数组键必须相同)ps
     if($ndformat) $ndArr = array_keys(end($array2D));
     //降维,也可以用implode,将一维数组转换为用逗号连接的字符串
     foreach ($array2D as $v){
@@ -66,3 +70,5 @@ function secMobile($phone)
 
     return  preg_replace("/^([0-9]{3})[0-9]{4}([0-9]{4})$/", "\$1****\$2",$phone);
 }
+
+
