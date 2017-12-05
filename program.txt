@@ -303,3 +303,7 @@ mysql强化30天，结果导向
 更新博客
 
 1204 更新博客，阅读mysql官方文档
+1205更新博客
+今天更新到阿里大于短信的时候，ios解析json出错，然后捕捉头信息，后来发现时大于的demo里面有
+header("Content-Type: text/plain; charset=utf-8");
+这样一个头声明，导致错误，后来去掉就好了。
