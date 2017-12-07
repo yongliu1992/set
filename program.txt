@@ -310,3 +310,6 @@ header("Content-Type: text/plain; charset=utf-8");
 
 1206更新博客
 php 异常捕捉错误，微信模版推送
+
+1207更新博客早睡
+php cnzz加密，加解密算法
